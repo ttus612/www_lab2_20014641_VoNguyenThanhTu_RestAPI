@@ -7,23 +7,25 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private long orderId;
+
     @Column(name = "order_date", nullable = false)
     private DateTime orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "emp_id", nullable = false)
+    @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
     private Employeee employeee;
 
     @ManyToOne
-    @JoinColumn(name = "cust_id", nullable = false)
+    @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 }
