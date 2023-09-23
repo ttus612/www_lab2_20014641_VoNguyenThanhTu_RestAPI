@@ -1,7 +1,6 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services;
 
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Employeee;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.CustomerRepository;
 
 import java.util.List;
@@ -13,8 +12,8 @@ public class CustomerServices {
         customerRepository = new CustomerRepository();
     }
 
-    public List<Customer> getAll(){
-            return customerRepository.getAllCus();
-    }
+//    public List<Customer> getAll(){
+//            return customerRepository.getAllCus();
+//    }
 
 }

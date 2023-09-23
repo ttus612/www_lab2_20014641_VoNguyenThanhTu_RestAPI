@@ -3,7 +3,6 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 import jakarta.persistence.*;
 import org.joda.time.DateTime;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -20,7 +19,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
-    private Employeee employeee;
+    private Employee employeee;
 
     @ManyToOne
     @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
@@ -32,7 +31,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(long orderId, DateTime orderDate, Employeee employeee, Customer customer, List<OrderDetail> orderDetails) {
+    public Order(long orderId, DateTime orderDate, Employee employeee, Customer customer, List<OrderDetail> orderDetails) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.employeee = employeee;
@@ -56,11 +55,11 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public Employeee getEmployeee() {
+    public Employee getEmployeee() {
         return employeee;
     }
 
-    public void setEmployeee(Employeee employeee) {
+    public void setEmployeee(Employee employeee) {
         this.employeee = employeee;
     }
 

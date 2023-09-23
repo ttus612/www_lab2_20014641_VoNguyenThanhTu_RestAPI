@@ -32,10 +32,10 @@ public class CustomerResources {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCustomers() {
-        List<Customer> customers = customerServices.getAll();
-        GenericEntity<List<Customer>> entity = new GenericEntity<List<Customer>>(customers) {};
+//        List<Customer> customers = customerServices.getAll();
+//        GenericEntity<List<Customer>> entity = new GenericEntity<List<Customer>>(customers) {};
 
-        return Response.ok(entity).build();
+        return Response.ok().build();
     }
 
 }

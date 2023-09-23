@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import org.joda.time.DateTime;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.EmployeeStatus;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "employee")
-public class Employeee {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +38,10 @@ public class Employeee {
     private List<Order> orders;
 
 
-    public Employeee() {
+    public Employee() {
     }
 
-    public Employeee(long empId, String fullName, DateTime dob, String email, String phone, String address, EmployeeStatus status, List<Order> orders) {
+    public Employee(long empId, String fullName, DateTime dob, String email, String phone, String address, EmployeeStatus status, List<Order> orders) {
         this.empId = empId;
         this.fullName = fullName;
         this.dob = dob;

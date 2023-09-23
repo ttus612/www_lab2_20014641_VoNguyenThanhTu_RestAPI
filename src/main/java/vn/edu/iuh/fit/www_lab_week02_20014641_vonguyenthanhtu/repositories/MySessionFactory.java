@@ -17,7 +17,7 @@ public class MySessionFactory {
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata metadata = new MetadataSources(serviceRegistry)
-                .addAnnotatedClass(Employeee.class)
+                .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Order.class)
                 .addAnnotatedClass(OrderDetail.class)

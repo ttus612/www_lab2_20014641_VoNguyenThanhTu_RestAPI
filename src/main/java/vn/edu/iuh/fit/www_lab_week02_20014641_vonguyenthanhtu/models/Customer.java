@@ -8,6 +8,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries({
+        @NamedQuery(name = "Customer.getAllCus", query = "SELECT c FROM Customer c "),
+//        @NamedQuery(name = "Customer.deleteCustomer", query = "UPDATE Customer c SET c.status = 'IN_ACTIVE' WHERE c.id = :id")
+})
 public class Customer{
 
     @Id
@@ -27,7 +31,7 @@ public class Customer{
     @Column(name = "address", length = 250, nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public Customer() {
@@ -35,6 +39,13 @@ public class Customer{
 
     public Customer(long custId, String custName, String email, String phone, String address) {
         this.custId = custId;
+        this.custName = custName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public Customer(String custName, String email, String phone, String address) {
         this.custName = custName;
         this.email = email;
         this.phone = phone;
