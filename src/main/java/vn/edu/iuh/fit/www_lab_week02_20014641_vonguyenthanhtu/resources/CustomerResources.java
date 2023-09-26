@@ -7,20 +7,21 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerServices;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFCustomerService;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 @Path("/customers")
 public class CustomerResources {
-    private final CustomerServices customerServices;
+    private final IFCustomerService customerServices;
 
     private Logger loggerFactory;
     private final Logger logger = loggerFactory.getLogger(this.getClass().getName());
 
     public CustomerResources() {
-        customerServices = new CustomerServices();
+        customerServices = new CustomerService();
     }
 
 //    @GET
@@ -32,10 +33,12 @@ public class CustomerResources {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCustomers() {
-//        List<Customer> customers = customerServices.getAll();
-//        GenericEntity<List<Customer>> entity = new GenericEntity<List<Customer>>(customers) {};
+        List<Customer> customers = customerServices.getAll(Customer.class);
+        GenericEntity<List<Customer>> entity = new GenericEntity<List<Customer>>(customers) {};
 
-        return Response.ok().build();
+        return Response.ok(entity).build();
     }
+
+
 
 }

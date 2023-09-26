@@ -2,18 +2,13 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services;
 
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.CustomerRepository;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFCustomerService;
 
-import java.util.List;
+public class CustomerService extends Generate<Customer> implements IFCustomerService {
+    private final CustomerRepository customerRepository;
 
-public class CustomerServices {
-    private CustomerRepository customerRepository;
 
-    public CustomerServices() {
+    public CustomerService() {
         customerRepository = new CustomerRepository();
     }
-
-//    public List<Customer> getAll(){
-//            return customerRepository.getAllCus();
-//    }
-
 }

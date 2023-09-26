@@ -9,7 +9,7 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.db.ConnectDB;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class GeneralityCRUD<T> implements IfGenerality<T>{
+public class GeneralityCRUD<T> implements IfGenerality<T>{
     private EntityManager em;
     private EntityManagerFactory emf;
     public GeneralityCRUD(){
