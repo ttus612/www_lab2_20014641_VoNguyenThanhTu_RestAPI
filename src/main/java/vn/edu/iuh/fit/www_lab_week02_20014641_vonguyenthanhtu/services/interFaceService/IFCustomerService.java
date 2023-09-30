@@ -2,5 +2,11 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFac
 
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
 
-public interface IFCustomerService extends IFGenerate<Customer> {
+import java.util.List;
+
+public interface IFCustomerService extends IFGenerateService<Customer> {
+    public List<Customer> gettAllCusActive();
+
+    public boolean deleteCus(long id);
+
 }

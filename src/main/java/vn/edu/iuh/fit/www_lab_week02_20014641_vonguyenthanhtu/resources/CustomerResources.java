@@ -1,8 +1,6 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.resources;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -24,21 +22,42 @@ public class CustomerResources {
         customerServices = new CustomerService();
     }
 
-//    @GET
-//    @Produces("text/plain")
-//    public String hello() {
-//        return "Hello, World!";
-//    }
-
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCustomers() {
-        List<Customer> customers = customerServices.getAll(Customer.class);
-        GenericEntity<List<Customer>> entity = new GenericEntity<List<Customer>>(customers) {};
-
+    @Produces("application/json")
+    public Response getAllResponse() {
+        List<Customer> entity = customerServices.gettAllCusActive();
         return Response.ok(entity).build();
     }
 
+    @POST
+    @Produces("application/json")
+    @Consumes("application/json")
+//    public Response insertCustomer(Customer customer){
+//        return Response.ok(customerServices.insert(customer)).build();
+//    }
+    public Customer insertCustomer(Customer customer){
+        if (customerServices.insert(customer)){
+            return customer;
+        }
+        return null;
+    }
 
+    @PUT
+    @Produces("application/json")
+    @Path("delete/{id}")
+    public Response deleteCustomer(@PathParam("id") long id){
 
+        return Response.ok(  customerServices.deleteCus(id)).build();
+    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("edit/")
+    public Customer updateCustomer(Customer customer){
+        System.out.println(customer.getCustId());
+        if (customerServices.update(customer)){
+            return customer;
+        }
+        return null;
+    }
 }

@@ -13,4 +13,13 @@ public enum EmployeeStatus {
     public int getValue() {
         return value;
     }
+
+    public static EmployeeStatus fromCode(int code) throws IllegalAccessException {
+        for (EmployeeStatus status: EmployeeStatus.values()) {
+            if (status.getValue() == code){
+                return status;
+            }
+        }
+        throw new IllegalAccessException("Invalid EmployeeStatus code: "+ code);
+    }
 }

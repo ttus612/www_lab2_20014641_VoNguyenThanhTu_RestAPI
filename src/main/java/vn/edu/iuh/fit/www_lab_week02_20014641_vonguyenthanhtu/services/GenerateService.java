@@ -1,15 +1,15 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services;
 
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.generality.GeneralityCRUD;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFGenerate;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFGenerateService;
 
 import java.util.List;
 import java.util.Optional;
 
-public class Generate<T> implements IFGenerate<T> {
+public class GenerateService<T> implements IFGenerateService<T> {
     protected final GeneralityCRUD<T> tGeneralityCRUD;
 
-    public Generate() {
+    public GenerateService() {
        tGeneralityCRUD = new GeneralityCRUD<>();
     }
 
@@ -25,12 +25,12 @@ public class Generate<T> implements IFGenerate<T> {
 
     @Override
     public boolean insert(T obj) {
-        return false;
+        return tGeneralityCRUD.insert(obj);
     }
 
     @Override
     public boolean update(T obj) {
-        return false;
+        return tGeneralityCRUD.update(obj);
     }
 
     @Override

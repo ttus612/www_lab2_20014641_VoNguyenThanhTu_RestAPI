@@ -9,12 +9,14 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.db.ConnectDB;
 import java.util.List;
 import java.util.Optional;
 
-public class GeneralityCRUD<T> implements IfGenerality<T>{
-    private EntityManager em;
-    private EntityManagerFactory emf;
+public class GeneralityCRUD<T> implements IFGenerality<T> {
+    protected final EntityManager em;
+    protected final EntityManagerFactory emf;
+    protected final EntityTransaction transaction ;
     public GeneralityCRUD(){
         emf = ConnectDB.getInstance().getEmf();
         em = emf.createEntityManager();
+        transaction = em.getTransaction();
     }
     @Override
     public Optional<T> get(Object id, Class<T> clazz) {
@@ -31,7 +33,6 @@ public class GeneralityCRUD<T> implements IfGenerality<T>{
 
     @Override
     public boolean insert(T obj) {
-        EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
             em.persist(obj);
@@ -50,7 +51,6 @@ public class GeneralityCRUD<T> implements IfGenerality<T>{
 
     @Override
     public boolean update(T obj) {
-        EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
             em.merge(obj);
@@ -69,7 +69,6 @@ public class GeneralityCRUD<T> implements IfGenerality<T>{
 
     @Override
     public boolean delete( Object id, Class<T> clazz) {
-        EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
             T obj = em.find(clazz, id); // Retrieve the entity by ID

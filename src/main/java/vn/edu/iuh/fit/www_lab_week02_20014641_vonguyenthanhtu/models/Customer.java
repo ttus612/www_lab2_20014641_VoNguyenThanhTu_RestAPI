@@ -2,6 +2,8 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
 import jakarta.persistence.*;
 import org.checkerframework.checker.units.qual.C;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.CustomerStatus;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.EmployeeStatus;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,8 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @NamedQueries({
-        @NamedQuery(name = "Customer.getAllCus", query = "SELECT c FROM Customer c "),
-//        @NamedQuery(name = "Customer.deleteCustomer", query = "UPDATE Customer c SET c.status = 'IN_ACTIVE' WHERE c.id = :id")
+        @NamedQuery(name = "Customer.findAllCus", query = "SELECT c FROM Customer c WHERE c.status = :status"),
+        @NamedQuery(name = "Customer.inActiveCus", query = "UPDATE Customer c SET c.status = 0 WHERE c.id = :id"),
+        @NamedQuery(name = "Customer.activeCus", query = "UPDATE Customer c SET c.status = 1 WHERE c.id = :id"),
 })
 public class Customer{
 
@@ -31,33 +34,39 @@ public class Customer{
     @Column(name = "address", length = 250, nullable = false)
     private String address;
 
+    @Column(name = "status", nullable = false)
+    private CustomerStatus status;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public Customer() {
     }
 
-    public Customer(long custId, String custName, String email, String phone, String address) {
+    public Customer(long custId, String custName, String email, String phone, String address, CustomerStatus status) {
         this.custId = custId;
         this.custName = custName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.status = status;
     }
 
-    public Customer(String custName, String email, String phone, String address) {
+    public Customer(String custName, String email, String phone, String address, CustomerStatus status) {
         this.custName = custName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.status = status;
     }
 
-    public Customer(long custId, String custName, String email, String phone, String address, List<Order> orders) {
+    public Customer(long custId, String custName, String email, String phone, String address, CustomerStatus status, List<Order> orders) {
         this.custId = custId;
         this.custName = custName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.status = status;
         this.orders = orders;
     }
 
@@ -101,6 +110,14 @@ public class Customer{
         this.address = address;
     }
 
+    public CustomerStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CustomerStatus status) {
+        this.status = status;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }
@@ -117,6 +134,7 @@ public class Customer{
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", status=" + status +
                 ", orders=" + orders +
                 '}';
     }

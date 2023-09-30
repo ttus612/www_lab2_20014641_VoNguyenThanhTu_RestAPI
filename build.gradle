@@ -44,6 +44,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     // https://mvnrepository.com/artifact/joda-time/joda-time
     implementation 'joda-time:joda-time:2.12.5'
+    implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:your_jackson_version'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1' // Chọn phiên bản phù hợp
 
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
