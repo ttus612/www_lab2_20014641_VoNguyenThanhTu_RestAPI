@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -9,6 +11,7 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerS
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFCustomerService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Path("/customers")
@@ -27,6 +30,17 @@ public class CustomerResources {
     public Response getAllResponse() {
         List<Customer> entity = customerServices.gettAllCusActive();
         return Response.ok(entity).build();
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/{id}")
+    public Response getCuss(@PathParam("id") long eid) {
+        Optional<Customer> customer = customerServices.get(eid, Customer.class);
+        if (customer.isPresent()){
+            return Response.ok(customer.get()).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST

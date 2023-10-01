@@ -15,7 +15,7 @@ public class GenerateService<T> implements IFGenerateService<T> {
 
     @Override
     public Optional<T> get(Object id, Class<T> clazz) {
-        return Optional.empty();
+        return tGeneralityCRUD.get(id, clazz);
     }
 
     @Override

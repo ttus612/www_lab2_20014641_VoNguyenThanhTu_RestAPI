@@ -2,6 +2,7 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
 import jakarta.persistence.*;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ public class ProductPrice{
 
     @Id
     @Column(name = "price_date_time", length = 50, nullable = false)
-    private DateTime price_date_time;
+    private LocalDateTime price_date_time;
 
     @Id
     @ManyToOne
@@ -27,18 +28,18 @@ public class ProductPrice{
     public ProductPrice() {
     }
 
-    public ProductPrice(DateTime price_date_time, Product product, double price, String note) {
+    public ProductPrice(LocalDateTime price_date_time, Product product, double price, String note) {
         this.price_date_time = price_date_time;
         this.product = product;
         this.price = price;
         this.note = note;
     }
 
-    public DateTime getPrice_date_time() {
+    public LocalDateTime getPrice_date_time() {
         return price_date_time;
     }
 
-    public void setPrice_date_time(DateTime price_date_time) {
+    public void setPrice_date_time(LocalDateTime price_date_time) {
         this.price_date_time = price_date_time;
     }
 

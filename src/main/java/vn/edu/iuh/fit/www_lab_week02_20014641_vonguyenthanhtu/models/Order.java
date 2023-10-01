@@ -2,6 +2,8 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
 import jakarta.persistence.*;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Order {
     private long orderId;
 
     @Column(name = "order_date", nullable = false)
-    private DateTime orderDate;
+    private LocalDateTime orderDate;
 
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
@@ -25,13 +27,13 @@ public class Order {
     @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderDetail> orderDetails;
 
     public Order() {
     }
 
-    public Order(long orderId, DateTime orderDate, Employee employeee, Customer customer, List<OrderDetail> orderDetails) {
+    public Order(long orderId, LocalDateTime orderDate, Employee employeee, Customer customer, List<OrderDetail> orderDetails) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.employeee = employeee;
@@ -47,11 +49,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public DateTime getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(DateTime orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
