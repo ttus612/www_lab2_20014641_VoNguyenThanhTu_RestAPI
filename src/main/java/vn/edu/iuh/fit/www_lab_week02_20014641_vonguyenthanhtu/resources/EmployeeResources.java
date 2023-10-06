@@ -4,6 +4,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Employee;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Order;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.EmployeeService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFEmployeeService;
@@ -73,7 +74,23 @@ public class EmployeeResources {
     }
 
 
+    @PUT
+    @Produces("application/json")
+    @Path("update_orderempl/{id}")
+    public boolean updateOrderOfEmpl(Order order, @PathParam("id") long id){
 
+        Employee existingEmployee = employeeServices.get(id, Employee.class).orElse(null);
+
+        Order orderNew =  new Order(order.getOrderDate(), order.getEmployeee(), order.getCustomer(), order.getOrderDetails());
+
+        if (existingEmployee != null){
+            existingEmployee.addOrderOfEmpl(orderNew);
+            employeeServices.update(existingEmployee);
+            return true;
+        }
+
+        return false;
+    }
 
 
 

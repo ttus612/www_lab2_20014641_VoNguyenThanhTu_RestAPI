@@ -1,6 +1,7 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -19,22 +20,31 @@ public class Order {
     private long orderId;
 
     @Column(name = "order_date", nullable = false)
-    @JsonProperty("dob")
+    @JsonProperty("order_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDate;
 
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
+    @JsonIgnore
     private Employee employeee;
 
     @ManyToOne
     @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
+    @JsonIgnore
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;
 
     public Order() {
+    }
+
+    public Order(LocalDateTime orderDate, Employee employeee, Customer customer, List<OrderDetail> orderDetails) {
+        this.orderDate = orderDate;
+        this.employeee = employeee;
+        this.customer = customer;
+        this.orderDetails = orderDetails;
     }
 
     public Order(long orderId, LocalDateTime orderDate, Employee employeee, Customer customer, List<OrderDetail> orderDetails) {
@@ -53,10 +63,12 @@ public class Order {
         this.orderId = orderId;
     }
 
+    @JsonProperty("order_date")
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
+    @JsonProperty("order_date")
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }

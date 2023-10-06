@@ -11,6 +11,7 @@ public class OrderDetail{
     @Id
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JsonIgnore
     private Order order;
 
     @Id

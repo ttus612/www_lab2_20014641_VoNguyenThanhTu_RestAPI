@@ -6,6 +6,7 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.ProductStatu
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.*;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.CustomerRepository;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.EmployeeRepository;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.OrderRepository;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.repositories.ProductRepository;
 
 import java.time.LocalDateTime;
@@ -15,10 +16,10 @@ import java.util.List;
 
 public class TestRositories {
     public static void main(String[] args) {
-        ProductRepository productRepository = new ProductRepository();
+//        ProductRepository productRepository = new ProductRepository();
 //
-        Product product1 = new Product("SAN PHAM 3", "SAN PHAM TOT NHAT ", "UNIT", "GO VAP", ProductStatus.ACTIVE,
-                null,null,null);
+//        Product product1 = new Product("SAN PHAM 3", "SAN PHAM TOT NHAT ", "UNIT", "GO VAP", ProductStatus.ACTIVE,
+//                null,null,null);
 
 //        List<ProductImage> productImages = new ArrayList<ProductImage>();
 //        ProductImage productImage1 = new ProductImage("public/anh5.jpg","PRODUCT: "+ product1.getName(), null);
@@ -38,11 +39,42 @@ public class TestRositories {
 //            product1.addProductPrice(productPrice);
 //        }
 
-        if (productRepository.insert(product1)){
+//        if (productRepository.insert(product1)){
+//            System.out.println("THANH CONG");
+//        }else {
+//            System.out.println("KHONG THANH CONG");
+//         }
+
+
+        OrderRepository orderRepository = new OrderRepository();
+        ProductRepository productRepository = new ProductRepository();
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        CustomerRepository customerRepository = new CustomerRepository();
+
+        Order order1 = new Order(LocalDateTime.now(), null, null,null);
+        if (orderRepository.insert(order1)){
             System.out.println("THANH CONG");
         }else {
             System.out.println("KHONG THANH CONG");
          }
+
+
+//        List<Order> orders = orderRepository.getAll(Order.class);
+
+//        for (Order order : orders) {
+//            System.out.println(order);
+//        }
+
+
+        //        List<Customer> cuss = customerRepository.getAll(Customer.class);
+//        List<Employee> employees = employeeRepository.getAll(Employee.class);
+//
+//        for (Customer c : cuss) {
+//            System.out.println(c);
+//        }
+//        for (Employee e : employees) {
+//            System.out.println(e);
+//        }
 
     }
 }

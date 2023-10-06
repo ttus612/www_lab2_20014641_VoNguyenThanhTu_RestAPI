@@ -6,6 +6,7 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.CustomerStat
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.EmployeeStatus;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -137,5 +138,13 @@ public class Customer{
                 ", status=" + status +
                 ", orders=" + orders +
                 '}';
+    }
+
+    public void addOrderOfCus(Order orderNew) {
+        if (this.orders == null) {
+            this.orders = new ArrayList<>();
+        }
+        this.orders.add(orderNew);
+        orderNew.setCustomer(this);
     }
 }

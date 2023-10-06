@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.EmployeeStatus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -146,5 +147,13 @@ public class Employee {
                 ", status=" + status +
                 ", orders=" + orders +
                 '}';
+    }
+
+    public void addOrderOfEmpl(Order orderNew) {
+        if (this.orders == null) {
+            this.orders = new ArrayList<>();
+        }
+        this.orders.add(orderNew);
+        orderNew.setEmployeee(this);
     }
 }

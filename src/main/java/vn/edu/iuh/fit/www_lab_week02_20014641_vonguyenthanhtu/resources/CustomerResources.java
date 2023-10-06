@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Order;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFCustomerService;
 
@@ -73,5 +74,23 @@ public class CustomerResources {
             return customer;
         }
         return null;
+    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("update_ordercus/{id}")
+    public boolean updateOrderOfCus(Order order, @PathParam("id") long id){
+
+        Customer existingCustomer = customerServices.get(id, Customer.class).orElse(null);
+
+        Order orderNew =  new Order(order.getOrderDate(), order.getEmployeee(), order.getCustomer(), order.getOrderDetails());
+
+        if (existingCustomer != null){
+            existingCustomer.addOrderOfCus(orderNew);
+            customerServices.update(existingCustomer);
+            return true;
+        }
+
+        return false;
     }
 }
