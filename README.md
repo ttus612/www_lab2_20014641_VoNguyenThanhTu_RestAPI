@@ -3,7 +3,7 @@
 
 - ✍ I'm a student of: [Industrial University of Ho Chi Minh City](https://iuh.edu.vn/).
 - ✍ Subject : WWW với Công nghệ java
-- ✍ Content: Nội dung bài tập tuần 1
+- ✍ Content: Nội dung bài tập tuần 2,3
 
 <br />
 
