@@ -5,6 +5,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Employee;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Product;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.ProductImage;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.ProductPrice;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.EmployeeService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.ProductService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFEmployeeService;
@@ -54,6 +56,34 @@ public class ProductResources {
             return product;
         }
         return null;
+    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("update_product_image/{id}")
+    public boolean updateProductImage(@PathParam("id") long id, ProductImage productImage){
+        Product existingProduct = productService.get(id, Product.class).orElse(null);
+        ProductImage productImageNew = new ProductImage(productImage.getImage_id(), productImage.getPath(), productImage.getAlternative(), productImage.getProduct());
+        if (existingProduct != null) {
+            existingProduct.addProductImage(productImageNew);
+            productService.update(existingProduct);
+            return true;
+        }
+        return false;
+    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("update_product_price/{id}")
+    public boolean updateProductPrice(@PathParam("id") long id, ProductPrice productPrice){
+        Product existingProduct = productService.get(id, Product.class).orElse(null);
+        ProductPrice productPriceNew = new ProductPrice(productPrice.getPrice_date_time(), productPrice.getProduct(), productPrice.getPrice(), productPrice.getNote());
+        if (existingProduct != null) {
+            existingProduct.addProductPrice(productPriceNew);
+            productService.update(existingProduct);
+            return true;
+        }
+        return false;
     }
 
 

@@ -40,36 +40,4 @@ public class ProductRepository extends GeneralityCRUD<Product> {
         }
     }
 
-    public boolean insertProduct_Image_Price(Product product) {
-        try {
-            transaction.begin();
-            em.persist(product);
-            //CHua xong
-            // Cascade persist for productImages
-            if (product.getProductImages() != null) {
-                for (ProductImage productImage : product.getProductImages()) {
-                    em.persist(productImage);
-                }
-            }
-
-            // Cascade persist for productPrices
-            if (product.getProductPrices() != null) {
-                for (ProductPrice productPrice : product.getProductPrices()) {
-                    em.persist(productPrice);
-                }
-            }
-
-            if (product.getOrderDetails() != null) {
-                for (OrderDetail orderDetail : product.getOrderDetails()) {
-                    em.persist(orderDetail);
-                }
-            }
-
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            return false;
-        }
-    }
 }

@@ -17,27 +17,26 @@ public class TestRositories {
     public static void main(String[] args) {
         ProductRepository productRepository = new ProductRepository();
 //
-        Product product1 = new Product("SAN PHAM 1", "SAN PHAM TOT NHAT ", "UNIT", "GO VAP", ProductStatus.ACTIVE,
+        Product product1 = new Product("SAN PHAM 3", "SAN PHAM TOT NHAT ", "UNIT", "GO VAP", ProductStatus.ACTIVE,
                 null,null,null);
 
-        List<ProductImage> productImages = new ArrayList<ProductImage>();
-        ProductImage productImage1 = new ProductImage("public/anh1.jpg","PRODUCT: "+ product1.getName(), null);
-        ProductImage productImage2 = new ProductImage("public/anh2.jpg","PRODUCT: "+ product1.getName(), null);
-        ProductImage productImage3 = new ProductImage("public/anh3.jpg","PRODUCT: "+ product1.getName(), null);
-        productImages.add(productImage1);
-        productImages.add(productImage2);
-        productImages.add(productImage3);
-        for (ProductImage productImage : productImages) {
-            product1.addProductImage(productImage);
-        }
+//        List<ProductImage> productImages = new ArrayList<ProductImage>();
+//        ProductImage productImage1 = new ProductImage("public/anh5.jpg","PRODUCT: "+ product1.getName(), null);
+//        ProductImage productImage2 = new ProductImage("public/anh6.jpg","PRODUCT: "+ product1.getName(), null);
+//        productImages.add(productImage1);
+//        productImages.add(productImage2);
+//
+//        for (ProductImage productImage : productImages) {
+//            product1.addProductImage(productImage);
+//        }
 
-        List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
-        ProductPrice productPrice1 = new ProductPrice(LocalDateTime.now(), null, 5.0, "PRODUCT: "+ product1.getProductId());
-        productPrices.add(productPrice1);
+//        List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
+//        ProductPrice productPrice1 = new ProductPrice(LocalDateTime.now(), null, 5.0, "PRODUCT: "+ product1.getProductId());
+//        productPrices.add(productPrice1);
 
-        for (ProductPrice productPrice : productPrices) {
-            product1.addProductPrice(productPrice);
-        }
+//        for (ProductPrice productPrice : productPrices) {
+//            product1.addProductPrice(productPrice);
+//        }
 
         if (productRepository.insert(product1)){
             System.out.println("THANH CONG");
