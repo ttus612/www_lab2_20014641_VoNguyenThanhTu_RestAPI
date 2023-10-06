@@ -44,7 +44,7 @@ public class ProductRepository extends GeneralityCRUD<Product> {
         try {
             transaction.begin();
             em.persist(product);
-
+            //CHua xong
             // Cascade persist for productImages
             if (product.getProductImages() != null) {
                 for (ProductImage productImage : product.getProductImages()) {
