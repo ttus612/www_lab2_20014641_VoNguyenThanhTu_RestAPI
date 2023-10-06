@@ -1,34 +1,37 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.resources;
 
+
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Employee;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Product;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.EmployeeService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.ProductService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFEmployeeService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFProductService;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@Path("/employees")
-public class EmployeeResources {
-    private final IFEmployeeService employeeServices;
+@Path("/products")
+public class ProductResources {
+    private final IFProductService productService ;
 
     private Logger loggerFactory;
     private final Logger logger = loggerFactory.getLogger(this.getClass().getName());
 
-    public EmployeeResources() {
-        employeeServices = new EmployeeService();
+    public ProductResources() {
+        productService = new ProductService();
     }
+
 
     @POST
     @Produces("application/json")
     @Consumes("application/json")
-    public Employee insertEmployee(Employee employee){
-        if (employeeServices.insert(employee)){
-            return employee;
+    public Product insertProduct(Product product){
+        if (productService.insert(product)){
+            return product;
         }
         return null;
     }
@@ -37,18 +40,18 @@ public class EmployeeResources {
     @PUT
     @Produces("application/json")
     @Path("delete/{id}")
-    public Response deleteCustomer(@PathParam("id") long id){
+    public Response deleteProduct(@PathParam("id") long id){
 
-        return Response.ok(  employeeServices.deleteEmpl(id)).build();
+        return Response.ok(  productService.deleteProduct(id)).build();
     }
 
     @PUT
     @Produces("application/json")
     @Path("edit/")
-    public Employee updateEmployee(Employee employee){
-        System.out.println(employee.getEmpId());
-        if (employeeServices.update(employee)){
-            return employee;
+    public Product updateProduct(Product product){
+        System.out.println(product.getProductId());
+        if (productService.update(product)){
+            return product;
         }
         return null;
     }
@@ -57,24 +60,19 @@ public class EmployeeResources {
     @GET
     @Produces("application/json")
     public Response getAllResponse() {
-        List<Employee> entity = employeeServices.gettAllEmplActive();
+        List<Product> entity = productService.gettAllProductActive();
         return Response.ok(entity).build();
     }
 
     @GET
     @Produces("application/json")
     @Path("/{id}")
-    public Response getEmpl(@PathParam("id") long eid) {
-        Optional<Employee> employee = employeeServices.get(eid, Employee.class);
-        if (employee.isPresent()){
-            return Response.ok(employee.get()).build();
+    public Response getProduct(@PathParam("id") long eid) {
+        Optional<Product> product = productService.get(eid, Product.class);
+        if (product.isPresent()){
+            return Response.ok(product.get()).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
-
-
-
-
 
 }

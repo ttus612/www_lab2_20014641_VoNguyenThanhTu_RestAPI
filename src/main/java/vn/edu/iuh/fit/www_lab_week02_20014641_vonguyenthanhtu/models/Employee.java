@@ -1,19 +1,21 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.converters.JodaLocalDateSerializer;
+
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.enums.EmployeeStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "employee")
+@NamedQueries({
+        @NamedQuery(name = "Employee.findAllEmpl", query = "SELECT c FROM Employee c WHERE c.status = :status"),
+        @NamedQuery(name = "Employee.inActiveEmpl", query = "UPDATE Employee c SET c.status = 0 WHERE c.id = :id"),
+        @NamedQuery(name = "Employee.activeEmpl", query = "UPDATE Employee c SET c.status = 1 WHERE c.id = :id"),
+})
 public class Employee {
 
     @Id
@@ -25,9 +27,9 @@ public class Employee {
     private String fullName;
 
     @Column(name = "dob", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @JsonSerialize(using = JodaLocalDateSerializer.class)
-    private LocalDate dob;
+    @JsonProperty("dob")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dob;
 
     @Column(name ="email", length = 250, unique = true)
     private String email;
@@ -48,7 +50,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String fullName, LocalDate dob, String email, String phone, String address, EmployeeStatus status) {
+    public Employee(String fullName, LocalDateTime dob, String email, String phone, String address, EmployeeStatus status) {
         this.fullName = fullName;
         this.dob = dob;
         this.email = email;
@@ -57,7 +59,7 @@ public class Employee {
         this.status = status;
     }
 
-    public Employee(long empId, String fullName, LocalDate dob, String email, String phone, String address, EmployeeStatus status, List<Order> orders) {
+    public Employee(long empId, String fullName, LocalDateTime dob, String email, String phone, String address, EmployeeStatus status, List<Order> orders) {
         this.empId = empId;
         this.fullName = fullName;
         this.dob = dob;
@@ -84,11 +86,11 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public LocalDate getDob() {
+    public LocalDateTime getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(LocalDateTime dob) {
         this.dob = dob;
     }
 

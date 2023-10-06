@@ -1,10 +1,12 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
+
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,6 +19,8 @@ public class Order {
     private long orderId;
 
     @Column(name = "order_date", nullable = false)
+    @JsonProperty("dob")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDate;
 
     @ManyToOne

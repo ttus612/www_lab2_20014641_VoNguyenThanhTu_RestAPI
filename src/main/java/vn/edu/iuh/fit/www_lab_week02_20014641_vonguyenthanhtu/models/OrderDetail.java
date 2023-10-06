@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ public class OrderDetail{
     @Id
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JsonIgnore
     private Product product;
 
     @Column(name = "quantity")

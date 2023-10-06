@@ -43,10 +43,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     // https://mvnrepository.com/artifact/joda-time/joda-time
-    implementation 'joda-time:joda-time:2.12.5'
+//    implementation 'joda-time:joda-time:2.12.5'
     implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:your_jackson_version'
     implementation 'javax.xml.bind:jaxb-api:2.3.1' // Chọn phiên bản phù hợp
-
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

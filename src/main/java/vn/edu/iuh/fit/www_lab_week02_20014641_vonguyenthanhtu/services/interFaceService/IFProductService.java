@@ -2,11 +2,12 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFac
 
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Customer;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Employee;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.Product;
 
 import java.util.List;
 
-public interface IFEmployeeService extends IFGenerateService<Employee> {
-    public List<Employee> gettAllEmplActive();
+public interface IFProductService extends IFGenerateService<Product> {
+    public List<Product> gettAllProductActive();
 
-    public boolean deleteEmpl(long id);
+    public boolean deleteProduct(long id);
 }

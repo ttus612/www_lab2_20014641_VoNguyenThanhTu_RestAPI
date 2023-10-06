@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,9 +23,16 @@ public class ProductImage {
     @ManyToOne
     @PrimaryKeyJoinColumn
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JsonIgnore
     private Product product;
 
     public ProductImage() {
+    }
+
+    public ProductImage(String path, String alternative, Product product) {
+        this.path = path;
+        this.alternative = alternative;
+        this.product = product;
     }
 
     public ProductImage(long image_id, String path, String alternative, Product product) {
@@ -72,7 +80,7 @@ public class ProductImage {
                 "image_id=" + image_id +
                 ", path='" + path + '\'' +
                 ", alternative='" + alternative + '\'' +
-                ", product=" + product +
+                ", product=" + product.getProductId()+
                 '}';
     }
 }
