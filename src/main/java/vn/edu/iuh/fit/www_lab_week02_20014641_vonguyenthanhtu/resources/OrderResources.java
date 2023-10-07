@@ -30,33 +30,38 @@ public class OrderResources {
         employeeService = new EmployeeService();
     }
 
-    @POST
-    @Produces("application/json")
-    @Consumes("application/json")
-    public Order createOrder(Order order){
-        if (orderService.insert(order)){
-            return order;
-        }
-        return null;
-    }
-
-
-//    @PUT
+//    @POST
 //    @Produces("application/json")
-//    @Path("orders_info_cus/{id}")
-//    public boolean updateOrderOfCus(Order order, @PathParam("id") long id){
-//
-//            Customer existingCustomer = customerService.get(id, Customer.class).orElse(null);
-//            Order orderNew =  new Order(order.getOrderDate(), order.getEmployeee(), order.getCustomer(), order.getOrderDetails());
-//
-//        if (existingCustomer != null){
-//                existingCustomer.addOrderOfCus(orderNew);
-//                customerService.update(existingCustomer);
-//                return true;
-//            }
-//
-//        return false;
+//    @Consumes("application/json")
+//    public Order createOrder(Order order){
+//        if (orderService.insert(order)){
+//            return order;
+//        }
+//        return null;
 //    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("get_order/{id}/{id2}")
+    public boolean updateProductImage(@PathParam("id") long id, @PathParam("id2") long id2, Order order) {
+        Customer existingCustomer = customerService.get(id, Customer.class).orElse(null);
+
+        Order orderCusNew =  new Order(order.getOrderDate(), order.getEmployeee(), order.getCustomer(), order.getOrderDetails());
+
+        Employee existingEmployee = employeeService.get(id2, Employee.class).orElse(null);
+
+
+            if (existingCustomer != null && existingEmployee != null){
+                existingCustomer.addOrderOfCus(orderCusNew);
+                existingEmployee.addOrderOfEmpl(orderCusNew);
+                customerService.update(existingCustomer);
+                employeeService.update(existingEmployee);
+
+                return true;
+            }
+
+        return false;
+    }
 
 
     @GET
