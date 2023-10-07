@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -106,5 +107,13 @@ public class Order {
                 ", customer=" + customer +
                 ", orderDetails=" + orderDetails +
                 '}';
+    }
+
+    public void addOrderDetail(OrderDetail orderDetailNew) {
+        if (this.orderDetails == null) {
+            this.orderDetails = new ArrayList<>();
+        }
+        this.orderDetails.add(orderDetailNew);
+        orderDetailNew.setOrder(this);
     }
 }

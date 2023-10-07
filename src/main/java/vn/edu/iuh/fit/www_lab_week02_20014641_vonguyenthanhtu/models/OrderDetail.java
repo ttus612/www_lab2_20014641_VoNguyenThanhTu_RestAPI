@@ -3,6 +3,7 @@ package vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "order_detail")
@@ -90,4 +91,5 @@ public class OrderDetail{
                 ", note='" + note + '\'' +
                 '}';
     }
+
 }

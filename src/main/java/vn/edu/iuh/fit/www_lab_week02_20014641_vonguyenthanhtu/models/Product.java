@@ -231,5 +231,14 @@ public class Product{
         this.productPrices.add(productPrice);
         productPrice.setProduct(this);
     }
+
+
+    public void addOrderDetail(OrderDetail orderDetailNew) {
+        if (this.orderDetails == null) {
+            this.orderDetails = new ArrayList<>();
+        }
+        this.orderDetails.add(orderDetailNew);
+        orderDetailNew.setProduct(this);
+    }
 }
 

@@ -6,9 +6,11 @@ import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.models.*;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.CustomerService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.EmployeeService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.OrderService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.ProductService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFCustomerService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFEmployeeService;
 import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFOrderService;
+import vn.edu.iuh.fit.www_lab_week02_20014641_vonguyenthanhtu.services.interFaceService.IFProductService;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +20,9 @@ import java.util.logging.Logger;
 public class OrderResources {
     private final IFOrderService orderService;
     private final IFCustomerService customerService;
-
     private final IFEmployeeService employeeService;
+
+    private final IFProductService productService;
 
     private Logger loggerFactory;
     private final Logger logger = loggerFactory.getLogger(this.getClass().getName());
@@ -28,6 +31,7 @@ public class OrderResources {
         orderService = new OrderService();
         customerService = new CustomerService();
         employeeService = new EmployeeService();
+        productService = new ProductService();
     }
 
 //    @POST
@@ -46,9 +50,10 @@ public class OrderResources {
     public boolean updateProductImage(@PathParam("id") long id, @PathParam("id2") long id2, Order order) {
         Customer existingCustomer = customerService.get(id, Customer.class).orElse(null);
 
+        Employee existingEmployee = employeeService.get(id2, Employee.class).orElse(null);
+
         Order orderCusNew =  new Order(order.getOrderDate(), order.getEmployeee(), order.getCustomer(), order.getOrderDetails());
 
-        Employee existingEmployee = employeeService.get(id2, Employee.class).orElse(null);
 
 
             if (existingCustomer != null && existingEmployee != null){
@@ -59,6 +64,29 @@ public class OrderResources {
 
                 return true;
             }
+
+        return false;
+    }
+
+    @PUT
+    @Produces("application/json")
+    @Path("get_order_detail/{id}/{id2}")
+    public boolean updateProductImage(@PathParam("id") long id,  @PathParam("id2") long id2,OrderDetail orderDetail) {
+        Order existingOrder = orderService.get(id, Order.class).orElse(null);
+
+        Product existingProduct = productService.get(id2, Product.class).orElse(null);
+
+        OrderDetail orderDetailNew =  new OrderDetail( orderDetail.getOrder(), orderDetail.getProduct(), orderDetail.getQuantity(),orderDetail.getPrice(), orderDetail.getNote());
+
+
+        if (existingOrder != null && existingProduct != null){
+            existingOrder.addOrderDetail(orderDetailNew);
+            existingProduct.addOrderDetail(orderDetailNew);
+            orderService.update(existingOrder);
+            productService.update(existingProduct);
+
+            return true;
+        }
 
         return false;
     }
