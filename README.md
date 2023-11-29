@@ -35,4 +35,6 @@
   <img src="images/yeuCau.jpg" width = 80%/>
 </p>
 
-
+<p align="center">
+  Do hiện tại em đang đi thực tập nên chỉ làm phần Backend thôi ạ! Mong thầy thông cảm
+</p>
